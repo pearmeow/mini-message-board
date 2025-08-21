@@ -4,6 +4,13 @@
         <link rel="stylesheet" href="/styles.css">
     </head>
 <body>
-        <p>Hello world</p>
+        <h1><%= title %></h1>
+        <% messages.forEach((item) => { %>
+        <div class="message">
+            <p>Message: <%= item.text%></p>
+            <p>By: <%= item.user%></p>
+            <p>Date added: <%= item.added%></p>
+        </div>
+        <% }) %>
 </body>
 </html>
