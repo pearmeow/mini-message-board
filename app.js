@@ -8,6 +8,7 @@ const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
 app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => res.render("index"));
 
 const PORT = 3000;
 
