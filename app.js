@@ -28,6 +28,10 @@ app.get("/new", (req, res) => {
     res.render("new");
 });
 
+app.post("/new", (req, res) => {
+    res.render("new");
+});
+
 const PORT = 3000;
 
 app.listen(PORT, (error) => {
