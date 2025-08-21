@@ -20,6 +20,8 @@ const messages = [
     },
 ];
 
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
     res.render("index", { title: "Mini Messageboard", messages: messages });
 });
@@ -29,7 +31,16 @@ app.get("/new", (req, res) => {
 });
 
 app.post("/new", (req, res) => {
-    res.render("new");
+    console.log(req.body);
+    const fields = req.body;
+    if (fields.message !== "" && fields.name !== "") {
+        messages.push({
+            text: fields.message,
+            user: fields.name,
+            added: new Date(),
+        });
+    }
+    res.redirect("/");
 });
 
 const PORT = 3000;
