@@ -10,6 +10,7 @@
             <p>Message: <%= item.text%></p>
             <p>By: <%= item.user%></p>
             <p>Date added: <%= item.added%></p>
+            <a href="/message?message=<%= item.text%>&user=<%= item.user%>&added=<%= item.added%>">Open</a>
         </div>
         <% }) %>
         <a href="/new">New message</a>

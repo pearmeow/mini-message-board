@@ -33,14 +33,22 @@ app.get("/new", (req, res) => {
 app.post("/new", (req, res) => {
     console.log(req.body);
     const fields = req.body;
-    if (fields.message !== "" && fields.name !== "") {
+    if (fields.message !== "" && fields.user !== "") {
         messages.push({
             text: fields.message,
-            user: fields.name,
+            user: fields.user,
             added: new Date(),
         });
     }
     res.redirect("/");
+});
+
+app.get("/message", (req, res) => {
+    res.render("message", {
+        user: req.query.user,
+        message: req.query.message,
+        added: req.query.added,
+    });
 });
 
 const PORT = 3000;
