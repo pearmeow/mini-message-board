@@ -26,7 +26,6 @@ VALUES
 DB_URL =
     argv[2] ||
     `postgresql://${process.env.USER}:${process.env.PASSWORD}@localhost:${process.env.PORT || 5432}/${process.env.DATABASE}`;
-console.log(DB_URL);
 
 async function main() {
     console.log("seeding...");
