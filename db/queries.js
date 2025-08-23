@@ -1,29 +1,27 @@
 const pool = require("./pool");
+const datefns = require("date-fns");
 
-async function getAllUsernames() {
-    const { rows } = await pool.query("SELECT * FROM usernames");
+async function getAllMessages() {
+    const { rows } = await pool.query("SELECT * FROM messages");
     return rows;
 }
 
-async function getUsernames(username) {
-    const { rows } = await pool.query(
-        "SELECT * FROM usernames where username=($1)",
-        [username],
+async function getMessage(id) {
+    const { rows } = await pool.query("SELECT * FROM messages where id=($1)", [
+        id,
+    ]);
+    return rows;
+}
+
+async function insertMessage(msg, author) {
+    await pool.query(
+        "INSERT INTO messages (msg, author, date) values(($1), ($2), ($3))",
+        [msg, author, datefns.format(new Date(), "yyyy-MM-dd")],
     );
-    return rows;
-}
-
-async function insertUsername(username) {
-    await pool.query("INSERT INTO usernames (username) values($1)", [username]);
-}
-
-async function deleteUsernames() {
-    await pool.query("DELETE from usernames *");
 }
 
 module.exports = {
-    getAllUsernames,
-    getUsernames,
-    insertUsername,
-    deleteUsernames,
+    insertMessage,
+    getMessage,
+    getAllMessages,
 };

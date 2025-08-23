@@ -24,20 +24,20 @@ VALUES
 `;
 
 DB_URL =
-  argv[2] ||
-  `postgresql://${process.env.USER}:${process.env.PASSWORD}@localhost:${process.env.PORT || 5432}/${process.env.DATABASE}`;
+    argv[2] ||
+    `postgresql://${process.env.USER}:${process.env.PASSWORD}@localhost:${process.env.PORT || 5432}/${process.env.DATABASE}`;
 console.log(DB_URL);
 
 async function main() {
-  console.log("seeding...");
-  const client = new Client({
-    connectionString: DB_URL,
-    ssl: true,
-  });
-  await client.connect();
-  await client.query(SQL);
-  await client.end();
-  console.log("done");
+    console.log("seeding...");
+    const client = new Client({
+        connectionString: DB_URL,
+        ssl: argv[2] && true,
+    });
+    await client.connect();
+    await client.query(SQL);
+    await client.end();
+    console.log("done");
 }
 
 main();
